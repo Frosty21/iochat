@@ -17,6 +17,13 @@ io.sockets.on('connection',(sockets) => {
   console.log('connected: %s sockets connected', connections.length);
 
 // disconnect
+socket.on('disconnect',function(socket){
   connections.splice(connections.indexOf(socket),1);
   console.log('Dissconnected: %s sockets connected', connections.length);
+    });
+    // send message 
+    socket.on('send message', function(title, description){
+      io.sockets.emit('new message', {title: title,
+        description: description});
+    })
 });
